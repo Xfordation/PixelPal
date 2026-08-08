@@ -1,0 +1,85 @@
+{
+  "name": "pixelpal",
+  "version": "0.1.0",
+  "description": "A pixel-art desktop cat companion with focus and wellness timers",
+  "main": "dist/main/index.js",
+  "private": true,
+  "scripts": {
+    "build:main": "tsc -p tsconfig.main.json",
+    "gen:sprites": "node scripts/generate-sprites.mjs",
+    "build:renderer": "npm run gen:sprites && vite build",
+    "build": "npm run build:main && npm run build:renderer",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "dist:mac": "npm run build && electron-builder --mac"
+  },
+  "author": "Aman",
+  "license": "MIT",
+  "build": {
+    "appId": "com.pixelpal.app",
+    "productName": "PixelPal",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "PixelPal"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "universal"
+          ]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "category": "public.app-category.entertainment",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "NSAccessibilityUsageDescription": "PixelPal counts keyboard and mouse activity (never key contents) so the cat can react to you. Nothing ever leaves your computer.",
+        "LSUIElement": true
+      }
+    },
+    "dmg": {
+      "title": "PixelPal"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "electron": "^43.3.0",
+    "electron-builder": "^26.15.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.1"
+  },
+  "dependencies": {
+    "electron-store": "^8.2.0",
+    "uiohook-napi": "^1.5.5"
+  }
+}

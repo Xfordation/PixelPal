@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'"
+    />
+    <title>PixelPal needs a permission</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        padding: 28px 32px;
+        background: #1e1e2a;
+        color: #f0f0f5;
+      }
+      h1 {
+        font-size: 18px;
+        margin: 0 0 12px;
+      }
+      p {
+        font-size: 13px;
+        line-height: 1.55;
+        color: #c8c8d8;
+      }
+      .buttons {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+      }
+      button {
+        font-size: 13px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+      }
+      #open-settings {
+        background: #f5a962;
+        color: #1a1a24;
+        font-weight: 600;
+      }
+      #recheck {
+        background: #34344a;
+        color: #f0f0f5;
+      }
+      #status {
+        margin-top: 14px;
+        font-size: 12px;
+        color: #8fd6c7;
+        min-height: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🐱 Let PixelPal see you're around</h1>
+    <p>
+      PixelPal uses macOS's Accessibility permission to notice when you move
+      the mouse or type, so the cat can chase your cursor, nap when you're
+      away, and react while you work.
+    </p>
+    <p>
+      <strong>Your privacy is safe:</strong> PixelPal only counts input events
+      — it never reads which keys you press, and it never sends anything off
+      your Mac. It has no network access at all.
+    </p>
+    <p>
+      Without the permission the cat still lives on your desktop and all
+      timers work — it just won't react to your activity.
+    </p>
+    <div class="buttons">
+      <button id="open-settings">Open System Settings</button>
+      <button id="recheck">I've enabled it — check again</button>
+    </div>
+    <div id="status"></div>
+    <script src="./onboarding.js"></script>
+  </body>
+</html>

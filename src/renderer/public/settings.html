@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'unsafe-inline'"
+    />
+    <title>PixelPal Settings</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        padding: 16px 20px 24px;
+        background: #1e1e2a;
+        color: #f0f0f5;
+        font-size: 13px;
+      }
+      h1 {
+        font-size: 16px;
+        margin: 0 0 14px;
+      }
+      section {
+        background: #26263a;
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+      }
+      h2 {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #9a9ab8;
+        margin: 0 0 10px;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .row:last-child {
+        margin-bottom: 0;
+      }
+      label {
+        flex: 1;
+      }
+      input[type='number'] {
+        width: 64px;
+        background: #34344a;
+        color: #f0f0f5;
+        border: 1px solid #44445e;
+        border-radius: 6px;
+        padding: 4px 6px;
+      }
+      input[type='text'],
+      input[type='time'] {
+        background: #34344a;
+        color: #f0f0f5;
+        border: 1px solid #44445e;
+        border-radius: 6px;
+        padding: 4px 6px;
+      }
+      input[type='text'] {
+        flex: 1;
+      }
+      select {
+        background: #34344a;
+        color: #f0f0f5;
+        border: 1px solid #44445e;
+        border-radius: 6px;
+        padding: 4px 6px;
+      }
+      button {
+        background: #f5a962;
+        color: #1a1a24;
+        font-weight: 600;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+      button.secondary {
+        background: #44445e;
+        color: #f0f0f5;
+        font-weight: 400;
+      }
+      button.danger {
+        background: #b8434e;
+        color: #fff;
+      }
+      .swatches {
+        display: flex;
+        gap: 8px;
+      }
+      .swatch {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        padding: 0;
+      }
+      .swatch.active {
+        border-color: #fff;
+      }
+      #alarm-list {
+        list-style: none;
+        margin: 8px 0 0;
+        padding: 0;
+      }
+      #alarm-list li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px 0;
+        border-top: 1px solid #34344a;
+      }
+      #alarm-list button {
+        padding: 2px 8px;
+      }
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4px;
+      }
+      .hint {
+        color: #8a8aa8;
+        font-size: 11px;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🐱 PixelPal Settings</h1>
+
+    <section>
+      <h2>Appearance</h2>
+      <div class="row">
+        <label>Cat color</label>
+        <div class="swatches" id="swatches">
+          <button class="swatch" data-palette="marmalade" style="background: #f5a962" title="Marmalade"></button>
+          <button class="swatch" data-palette="tuxedo" style="background: #2e2e3e" title="Tuxedo"></button>
+          <button class="swatch" data-palette="seafoam" style="background: #8fd6c7" title="Seafoam"></button>
+          <button class="swatch" data-palette="shadow" style="background: #4b4b66" title="Shadow"></button>
+        </div>
+      </div>
+      <div class="row">
+        <label for="custom-color">Custom color</label>
+        <input type="color" id="custom-color" value="#f5a962" />
+      </div>
+      <div class="row">
+        <label for="scale">Sprite size</label>
+        <select id="scale">
+          <option value="0.75">Small</option>
+          <option value="1" selected>Normal</option>
+          <option value="1.25">Large</option>
+        </select>
+      </div>
+    </section>
+
+    <section>
+      <h2>Behavior</h2>
+      <div class="row">
+        <label for="typing-threshold">Overheat typing threshold (KPM)</label>
+        <input type="number" id="typing-threshold" min="60" max="1000" step="10" />
+      </div>
+      <div class="row">
+        <label for="quiet">Quiet mode (rest at screen edge)</label>
+        <input type="checkbox" id="quiet" />
+      </div>
+      <div class="row">
+        <label for="stay">Stay (cat never moves itself)</label>
+        <input type="checkbox" id="stay" />
+      </div>
+      <div class="row">
+        <label for="login">Launch at login</label>
+        <input type="checkbox" id="login" />
+      </div>
+    </section>
+
+    <section>
+      <h2>Pomodoro</h2>
+      <div class="row">
+        <label for="work-min">Work (minutes)</label>
+        <input type="number" id="work-min" min="1" max="120" />
+      </div>
+      <div class="row">
+        <label for="break-min">Break (minutes)</label>
+        <input type="number" id="break-min" min="1" max="60" />
+      </div>
+      <div class="row">
+        <label for="long-min">Long break (minutes)</label>
+        <input type="number" id="long-min" min="1" max="90" />
+      </div>
+      <div class="row">
+        <label for="cycles">Cycles per long break</label>
+        <input type="number" id="cycles" min="2" max="8" />
+      </div>
+      <div class="row">
+        <span id="pomo-status" class="hint">Pomodoro idle</span>
+        <button id="pomo-toggle">Start</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Reminders</h2>
+      <div class="row">
+        <label for="stretch-on">Stretch reminder</label>
+        <input type="checkbox" id="stretch-on" />
+        <input type="number" id="stretch-min" min="5" max="240" title="minutes" />
+      </div>
+      <div class="row">
+        <label for="water-on">Water reminder</label>
+        <input type="checkbox" id="water-on" />
+        <input type="number" id="water-min" min="5" max="240" title="minutes" />
+      </div>
+      <div class="row">
+        <label for="notif">Native notifications</label>
+        <input type="checkbox" id="notif" />
+      </div>
+    </section>
+
+    <section>
+      <h2>Alarms</h2>
+      <div class="row">
+        <input type="time" id="alarm-time" />
+        <input type="text" id="alarm-msg" placeholder="Message" />
+        <button id="alarm-add">Add</button>
+      </div>
+      <ul id="alarm-list"></ul>
+      <div class="hint">Alarms fire once at the next occurrence of the time.</div>
+    </section>
+
+    <section>
+      <h2>Pinned note</h2>
+      <div class="row">
+        <input type="text" id="note-text" placeholder="Note above the cat's head" />
+        <button id="note-set">Pin</button>
+        <button id="note-clear" class="secondary">Clear</button>
+      </div>
+    </section>
+
+    <div class="footer">
+      <button id="reset" class="danger">Reset to defaults</button>
+    </div>
+
+    <script src="./settings.js"></script>
+  </body>
+</html>
